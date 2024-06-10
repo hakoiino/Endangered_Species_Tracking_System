@@ -1,2 +1,4 @@
-package org.example;public class HomeTabController {
+package org.example;
+
+public class HomeTabController {
 }

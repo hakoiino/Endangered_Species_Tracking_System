@@ -1,2 +1,4 @@
-package org.example;public class RegionController {
+package org.example;
+
+public class RegionController {
 }

@@ -1,2 +1,4 @@
-package org.example;public class ThreatController {
+package org.example;
+
+public class ThreatController {
 }
