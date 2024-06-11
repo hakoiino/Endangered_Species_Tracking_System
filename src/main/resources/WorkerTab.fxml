@@ -7,18 +7,18 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.WorkerController" prefHeight="180.0" prefWidth="200.0">
     <children>
-        <TableView layoutX="17.0" layoutY="47.0" prefHeight="308.0" prefWidth="567.0">
+        <TableView layoutX="17.0" layoutY="47.0" prefHeight="308.0" prefWidth="567.0" fx:id="workerTableView">
             <columns>
-                <TableColumn prefWidth="37.0" text="ID" />
-                <TableColumn prefWidth="72.0" text="First Name" />
-                <TableColumn prefWidth="71.0" text="Last Name" />
-                <TableColumn minWidth="0.0" prefWidth="63.0" text="Email" />
-                <TableColumn prefWidth="98.0" text="Phone Number" />
-                <TableColumn prefWidth="70.0" text="Manager ID" />
-                <TableColumn prefWidth="87.0" text="Organization ID" />
-                <TableColumn prefWidth="66.0" text="Project ID" />
+                <TableColumn prefWidth="37.0" text="ID" fx:id="workerIdColumn" />
+                <TableColumn prefWidth="72.0" text="First Name" fx:id="workerFirstNameColumn" />
+                <TableColumn prefWidth="71.0" text="Last Name" fx:id="workerLastNameColumn" />
+                <TableColumn minWidth="0.0" prefWidth="63.0" text="Email" fx:id="workerEmailColumn" />
+                <TableColumn prefWidth="98.0" text="Phone Number" fx:id="workerPhoneNumberColumn" />
+                <TableColumn prefWidth="70.0" text="Manager ID" fx:id="workerManagerIdColumn" />
+                <TableColumn prefWidth="87.0" text="Organization ID" fx:id="workerOrganizationIdColumn" />
+                <TableColumn prefWidth="66.0" text="Project ID" fx:id="workerProjectIdColumn" />
             </columns>
         </TableView>
-        <Button layoutX="17.0" layoutY="14.0" mnemonicParsing="false" text="Add"/>
+        <Button layoutX="17.0" layoutY="14.0" mnemonicParsing="false" text="Add" fx:id="workerAddButton" onAction="#addWorker"/>
     </children>
 </AnchorPane>
