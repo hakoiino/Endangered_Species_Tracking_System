@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.RegionController" prefHeight="180.0" prefWidth="200.0">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.RegionController" prefHeight="580.0" prefWidth="847.0">
     <children>
-        <TableView layoutX="17.0" layoutY="47.0" prefHeight="308.0" prefWidth="567.0" fx:id="regionTableView">
+        <TableView layoutX="165.0" layoutY="27.0" prefHeight="538.0" prefWidth="667.0" fx:id="regionTableView">
             <columns>
                 <TableColumn prefWidth="37.0" text="ID" fx:id="regionIdColumn" />
                 <TableColumn prefWidth="137.0" text="Name" fx:id="regionNameColumn" />

@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MainController" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="580.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MainController">
     <children>
-        <TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="400.0" prefWidth="600.0" fx:id="tabPane">
+        <TabPane fx:id="tabPane" prefHeight="580.0" prefWidth="847.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Home">
                     <content>
-                        <fx:include source="HomeTab.fxml"/>
+                        <fx:include source="HomeTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Summarized Data">
                     <content>
-                        <fx:include source="SummarizedDataTab.fxml"/>
+                        <fx:include source="SummarizedDataTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Detail Reports">
                     <content>
-                        <fx:include source="DetailReportsTab.fxml"/>
+                        <fx:include source="DetailReportsTab.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Habitat" fx:id="habitatTab">
+                <Tab fx:id="habitatTab" text="Habitat">
                     <content>
-                        <fx:include source="HabitatTab.fxml"/>
+                        <fx:include source="HabitatTab.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Threat" fx:id="threatTab">
+                <Tab fx:id="threatTab" text="Threat">
                     <content>
-                        <fx:include source="ThreatTab.fxml"/>
+                        <fx:include source="ThreatTab.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Region" fx:id="regionTab">
+                <Tab fx:id="regionTab" text="Region">
                     <content>
-                        <fx:include source="RegionTab.fxml"/>
+                        <fx:include source="RegionTab.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Species" fx:id="speciesTab">
+                <Tab fx:id="speciesTab" text="Species">
                     <content>
-                        <fx:include source="SpeciesTab.fxml"/>
+                        <fx:include source="SpeciesTab.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Organization" fx:id="organizationTab">
+                <Tab fx:id="organizationTab" text="Organization">
                     <content>
-                        <fx:include source="OrganizationTab.fxml"/>
+                        <fx:include source="OrganizationTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Manager">
                     <content>
-                        <fx:include source="ManagerTab.fxml"/>
+                        <fx:include source="ManagerTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Worker">
                     <content>
-                        <fx:include source="WorkerTab.fxml"/>
+                        <fx:include source="WorkerTab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Restoration Project Management">
                     <content>
-                        <fx:include source="RestorationProjectTab.fxml"/>
+                        <fx:include source="RestorationProjectTab.fxml" />
                     </content>
                 </Tab>
             </tabs>

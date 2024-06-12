@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javafx.scene.control.TextField;
 
 public class HabitatController {
 
@@ -23,6 +24,15 @@ public class HabitatController {
     private TableColumn<Habitat, String> habitat_DescriptionColumn;
     @FXML
     private TableColumn<Habitat, Integer> habitat_regionIdColumn;
+
+    @FXML
+    private TextField name_input;
+
+    @FXML
+    private TextField region_input;
+
+    @FXML
+    private TextField description_input;
 
     private ObservableList<Habitat> habitatList = FXCollections.observableArrayList();
 
@@ -62,7 +72,47 @@ public class HabitatController {
 
     @FXML
     private void addHabitat() {
-        // Code to add a new habitat
+        Connection connection = DatabaseConnection.getConnection();
+        String name = name_input.getText();
+        int region = Integer.parseInt(region_input.getText());
+        String description = description_input.getText();
+        String query = "INSERT INTO habitats (habitat_name, habitat_description, region_id) " +
+                "VALUES ('" + name + "', '" + description + "', '" + region + "');";
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+
+            query = "SELECT * FROM habitats";
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            int id = 0;
+            while(resultSet.next()) {
+                id = resultSet.getInt("habitat_id");
+                name = resultSet.getString("habitat_name");
+                description = resultSet.getString("habitat_description");
+                region = resultSet.getInt("region_id");
+
+
+            }
+            Habitat habitat = new Habitat();
+            habitat.setHabitatId(id);
+            habitat.setHabitatName(name);
+            habitat.setHabitatDescription(description);
+            habitat.setRegionId(region);
+
+            name_input.clear();
+            region_input.clear();
+            description_input.clear();
+
+            habitatList.add(habitat);
+            habitatTableView.setItems(habitatList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }
 
