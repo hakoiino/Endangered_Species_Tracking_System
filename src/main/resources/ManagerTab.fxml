@@ -3,20 +3,39 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ManagerController" prefHeight="580.0" prefWidth="847.0">
+<AnchorPane prefHeight="580.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ManagerController">
     <children>
-        <TableView layoutX="165.0" layoutY="27.0" prefHeight="538.0" prefWidth="667.0" fx:id="managerTableView">
+        <TableView fx:id="managerTableView" layoutX="165.0" layoutY="27.0" prefHeight="538.0" prefWidth="667.0">
             <columns>
-                <TableColumn prefWidth="37.0" text="ID" fx:id="managerIdColumn" />
-                <TableColumn prefWidth="93.0" text="First Name" fx:id="managerFirstNameColumn" />
-                <TableColumn prefWidth="98.0" text="Last Name" fx:id="managerLastNameColumn" />
-                <TableColumn minWidth="0.0" prefWidth="111.0" text="Email" fx:id="managerEmailColumn" />
-                <TableColumn prefWidth="132.0" text="Phone Number" fx:id="managerPhoneNumberColumn" />
-                <TableColumn prefWidth="93.0" text="Organization ID" fx:id="managerOrganizationIdColumn" />
+                <TableColumn fx:id="managerIdColumn" prefWidth="37.0" text="ID" />
+                <TableColumn fx:id="managerFirstNameColumn" prefWidth="93.0" text="First Name" />
+                <TableColumn fx:id="managerLastNameColumn" prefWidth="98.0" text="Last Name" />
+                <TableColumn fx:id="managerEmailColumn" minWidth="0.0" prefWidth="111.0" text="Email" />
+                <TableColumn fx:id="managerPhoneNumberColumn" prefWidth="132.0" text="Phone Number" />
+                <TableColumn fx:id="managerOrganizationIdColumn" prefWidth="128.7999267578125" text="Organization ID" />
             </columns>
         </TableView>
-        <Button layoutX="17.0" layoutY="14.0" mnemonicParsing="false" text="Add" fx:id="managerAddButton" onAction="#addManager"/>
+        <Button fx:id="managerAddButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#addManager" text="Add" />
+        <AnchorPane layoutX="14.0" layoutY="57.0" prefHeight="509.0" prefWidth="144.0">
+            <children>
+                <Text layoutX="2.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="143.99999999999994" />
+                <TextField fx:id="Fname_input" layoutY="31.0" />
+                <Text layoutX="3.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="143.99999999999994" />
+                <TextField fx:id="Lname_input" layoutX="1.0" layoutY="106.0" />
+                <Text layoutX="1.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="143.99999999999994" />
+                <TextField fx:id="email_input" layoutX="-1.0" layoutY="181.0" />
+                <Text layoutX="1.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager ID:" wrappingWidth="143.99999999999994" />
+                <TextField fx:id="to_delete" layoutX="-2.0" layoutY="399.0" />
+                <Button fx:id="habitat_deleteButton" layoutX="5.0" layoutY="426.0" mnemonicParsing="false" onAction="#deleteManager" text="Delete" />
+            <Text layoutX="3.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" wrappingWidth="143.99999999999994" />
+            <TextField fx:id="phone_input" layoutX="1.0" layoutY="250.0" />
+            <Text layoutX="3.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Organization ID:" wrappingWidth="143.99999999999994" />
+            <TextField fx:id="organization_input" layoutX="1.0" layoutY="315.0" />
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

@@ -3,8 +3,10 @@ package org.example;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,6 +29,27 @@ public class OrganizationController {
     private TableColumn<Organization, String> organizationDescriptionColumn;
 
     private ObservableList<Organization> organizationList = FXCollections.observableArrayList();
+
+
+
+    @FXML
+    private TextField description_input;
+
+    @FXML
+    private TextField email_input;
+
+    @FXML
+    private TextField name_input;
+
+    @FXML
+    private Button organization_deleteButton;
+
+    @FXML
+    private TextField phone_input;
+
+    @FXML
+    private TextField to_delete;
+
 
     @FXML
     private void initialize() {
@@ -66,6 +89,71 @@ public class OrganizationController {
 
     @FXML
     private void addOrganization() {
-        // Code to add a new organization
+        Connection connection = DatabaseConnection.getConnection();
+        String name = name_input.getText();
+        String email = email_input.getText();
+        String phoneNumber = phone_input.getText();
+        String description = description_input.getText();
+
+        String query = "INSERT INTO organizations (organization_name, organization_email, organization_phone, organization_description) " +
+                "VALUES ('" + name + "', '" + email + "', '" + phoneNumber + "', '" + description + "');";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+
+            query = "SELECT * FROM organizations";
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            int id = 0;
+            while (resultSet.next()) {
+                id = resultSet.getInt("organization_id");
+                name = resultSet.getString("organization_name");
+                email = resultSet.getString("organization_email");
+                phoneNumber = resultSet.getString("organization_phone");
+                description = resultSet.getString("organization_description");
+            }
+
+            Organization organization = new Organization();
+            organization.setId(id);
+            organization.setName(name);
+            organization.setEmail(email);
+            organization.setPhoneNumber(phoneNumber);
+            organization.setDescription(description);
+
+            organizationList.add(organization);
+            name_input.clear();
+            email_input.clear();
+            phone_input.clear();
+            description_input.clear();
+
+            organizationTableView.setItems(organizationList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @FXML
+    void deleteOrganization() {
+        Connection connection = DatabaseConnection.getConnection();
+        int id = Integer.parseInt(to_delete.getText());
+        String query = "DELETE FROM organizations WHERE organization_id = " + id +";";
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            to_delete.clear();
+            for(int i = 0; i < organizationList.size(); i++) {
+                if(organizationList.get(i).getId() == id) {
+                    organizationList.remove(i);
+                }
+            }
+            organizationTableView.setItems(organizationList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

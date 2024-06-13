@@ -3,6 +3,7 @@ package org.example;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,6 +11,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
+
 import javafx.scene.control.TextField;
 
 public class HabitatController {
@@ -35,6 +38,12 @@ public class HabitatController {
     private TextField description_input;
 
     private ObservableList<Habitat> habitatList = FXCollections.observableArrayList();
+
+    @FXML
+    private TextField to_delete;
+
+    @FXML
+    private Button habitat_deleteButton;
 
     @FXML
     private void initialize() {
@@ -112,6 +121,27 @@ public class HabitatController {
         }
 
 
+
+    }
+
+    @FXML
+    void deleteHabitat() {
+        Connection connection = DatabaseConnection.getConnection();
+        int id = Integer.parseInt(to_delete.getText());
+        String query = "DELETE FROM habitats WHERE habitat_id = " + id +";";
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            to_delete.clear();
+            for(int i = 0; i < habitatList.size(); i++) {
+                if(habitatList.get(i).getHabitatId() == id) {
+                    habitatList.remove(i);
+                }
+            }
+            habitatTableView.setItems(habitatList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
