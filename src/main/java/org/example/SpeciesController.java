@@ -3,8 +3,10 @@ package org.example;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,6 +29,25 @@ public class SpeciesController {
     private TableColumn<Species, Integer> speciesHabitatIdColumn;
 
     private ObservableList<Species> speciesList = FXCollections.observableArrayList();
+
+
+    @FXML
+    private TextField habitat_input;
+
+    @FXML
+    private TextField name_input;
+
+    @FXML
+    private TextField population_input;
+
+    @FXML
+    private Button species_deleteButton;
+
+    @FXML
+    private TextField status_input;
+
+    @FXML
+    private TextField to_delete;
 
     @FXML
     private void initialize() {
@@ -66,6 +87,68 @@ public class SpeciesController {
 
     @FXML
     private void addSpecies() {
-        // Code to add a new species
+        Connection connection = DatabaseConnection.getConnection();
+        String name = name_input.getText();
+        String conservationStatus = status_input.getText();
+        int population = Integer.parseInt(population_input.getText());
+        int habitatId = Integer.parseInt(habitat_input.getText());
+
+        String query = "INSERT INTO species (species_name, conservation_status, population, habitat_id) " +
+                "VALUES ('" + name + "', '" + conservationStatus + "', '" + population + "', '" + habitatId + "');";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+
+            query = "SELECT * FROM species";
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            int id = 0;
+
+            while (resultSet.next()) {
+                id = resultSet.getInt("species_id");
+                name = resultSet.getString("species_name");
+                conservationStatus = resultSet.getString("conservation_status");
+                population = resultSet.getInt("population");
+                habitatId = resultSet.getInt("habitat_id");
+            }
+            Species species = new Species();
+            species.setId(id);
+            species.setName(name);
+            species.setConservationStatus(conservationStatus);
+            species.setPopulation(population);
+            species.setHabitatId(habitatId);
+            speciesList.add(species);
+            name_input.clear();
+            status_input.clear();
+            population_input.clear();
+            habitat_input.clear();
+            speciesTableView.setItems(speciesList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @FXML
+    void deleteSpecies() {
+        Connection connection = DatabaseConnection.getConnection();
+        int id = Integer.parseInt(to_delete.getText());
+        String query = "DELETE FROM species WHERE species_id = " + id +";";
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            to_delete.clear();
+            for(int i = 0; i < speciesList.size(); i++) {
+                if(speciesList.get(i).getId() == id) {
+                    speciesList.remove(i);
+                }
+            }
+            speciesTableView.setItems(speciesList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
